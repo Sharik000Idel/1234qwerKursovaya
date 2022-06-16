@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Skyline_DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Airport">
+    <Key>
+      <PropertyRef Name="IDairport" />
+    </Key>
+    <Property Name="IDairport" Type="int" Nullable="false" />
+    <Property Name="names" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="CoordinatesX" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CoordinatesY" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Buyer">
+    <Key>
+      <PropertyRef Name="IDbuyer" />
+    </Key>
+    <Property Name="IDbuyer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="60" Nullable="false" />
+    <Property Name="Surname" Type="nchar" MaxLength="60" Nullable="false" />
+    <Property Name="Lastname" Type="nchar" MaxLength="60" />
+    <Property Name="Birthday" Type="date" Nullable="false" />
+    <Property Name="phone_number" Type="nchar" MaxLength="60" Nullable="false" />
+    <Property Name="Login" Type="nchar" MaxLength="60" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="60" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="ID_flight" />
+    </Key>
+    <Property Name="ID_flight" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="place_of_departure" Type="int" Nullable="false" />
+    <Property Name="landing_place" Type="int" Nullable="false" />
+    <Property Name="departure_time" Type="datetime" Nullable="false" />
+    <Property Name="boarding_time" Type="datetime" Nullable="false" />
+    <Property Name="number_of_passengers" Type="int" />
+    <Property Name="cost" Type="int" />
+    <Property Name="ID_plane" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Personnal">
+    <Key>
+      <PropertyRef Name="ID_personnel" />
+    </Key>
+    <Property Name="ID_personnel" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="60" Nullable="false" />
+    <Property Name="Surname" Type="nchar" MaxLength="60" Nullable="false" />
+    <Property Name="Lastname" Type="nchar" MaxLength="60" />
+    <Property Name="ID_vacancy" Type="int" Nullable="false" />
+    <Property Name="WherePers" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Plane">
+    <Key>
+      <PropertyRef Name="ID_plane" />
+    </Key>
+    <Property Name="ID_plane" Type="int" Nullable="false" />
+    <Property Name="type" Type="nchar" MaxLength="60" Nullable="false" />
+    <Property Name="Number_of_workers" Type="int" Nullable="false" />
+    <Property Name="Number_of_pilots" Type="int" Nullable="false" />
+    <Property Name="Number_of_seats" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Speed" Type="int" Nullable="false" />
+    <Property Name="Image" Type="nchar" MaxLength="60" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlanePersonnal">
+    <Key>
+      <PropertyRef Name="ID_personnel" />
+      <PropertyRef Name="ID_Flight" />
+    </Key>
+    <Property Name="ID_personnel" Type="int" Nullable="false" />
+    <Property Name="ID_Flight" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tickets">
+    <Key>
+      <PropertyRef Name="ID_ticket" />
+    </Key>
+    <Property Name="ID_ticket" Type="int" Nullable="false" />
+    <Property Name="ID_Flight" Type="int" Nullable="false" />
+    <Property Name="ID_buyer" Type="int" Nullable="false" />
+    <Property Name="chair_number" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vacancy">
+    <Key>
+      <PropertyRef Name="ID_vacancy" />
+    </Key>
+    <Property Name="ID_vacancy" Type="int" Nullable="false" />
+    <Property Name="Job_title" Type="nchar" MaxLength="80" Nullable="false" />
+    <Property Name="descriptions" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_Flight_Airport">
+    <End Role="Airport" Type="Self.Airport" Multiplicity="1" />
+    <End Role="Flight" Type="Self.Flight" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airport">
+        <PropertyRef Name="IDairport" />
+      </Principal>
+      <Dependent Role="Flight">
+        <PropertyRef Name="place_of_departure" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Flight_Airport1">
+    <End Role="Airport" Type="Self.Airport" Multiplicity="1" />
+    <End Role="Flight" Type="Self.Flight" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airport">
+        <PropertyRef Name="IDairport" />
+      </Principal>
+      <Dependent Role="Flight">
+        <PropertyRef Name="landing_place" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Flight_Plane">
+    <End Role="Plane" Type="Self.Plane" Multiplicity="1" />
+    <End Role="Flight" Type="Self.Flight" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Plane">
+        <PropertyRef Name="ID_plane" />
+      </Principal>
+      <Dependent Role="Flight">
+        <PropertyRef Name="ID_plane" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnal_Vacancy">
+    <End Role="Vacancy" Type="Self.Vacancy" Multiplicity="1" />
+    <End Role="Personnal" Type="Self.Personnal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vacancy">
+        <PropertyRef Name="ID_vacancy" />
+      </Principal>
+      <Dependent Role="Personnal">
+        <PropertyRef Name="ID_vacancy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlanePersonnal_Flight">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="PlanePersonnal" Type="Self.PlanePersonnal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="ID_flight" />
+      </Principal>
+      <Dependent Role="PlanePersonnal">
+        <PropertyRef Name="ID_Flight" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlanePersonnal_Personnal">
+    <End Role="Personnal" Type="Self.Personnal" Multiplicity="1" />
+    <End Role="PlanePersonnal" Type="Self.PlanePersonnal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnal">
+        <PropertyRef Name="ID_personnel" />
+      </Principal>
+      <Dependent Role="PlanePersonnal">
+        <PropertyRef Name="ID_personnel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tickets_Buyer">
+    <End Role="Buyer" Type="Self.Buyer" Multiplicity="1" />
+    <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buyer">
+        <PropertyRef Name="IDbuyer" />
+      </Principal>
+      <Dependent Role="Tickets">
+        <PropertyRef Name="ID_buyer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tickets_Flight">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="ID_flight" />
+      </Principal>
+      <Dependent Role="Tickets">
+        <PropertyRef Name="ID_Flight" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище Skyline_DBModelContainer">
+    <EntitySet Name="Airport" EntityType="Self.Airport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Buyer" EntityType="Self.Buyer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Personnal" EntityType="Self.Personnal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Plane" EntityType="Self.Plane" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlanePersonnal" EntityType="Self.PlanePersonnal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vacancy" EntityType="Self.Vacancy" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Flight_Airport" Association="Self.FK_Flight_Airport">
+      <End Role="Airport" EntitySet="Airport" />
+      <End Role="Flight" EntitySet="Flight" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Flight_Airport1" Association="Self.FK_Flight_Airport1">
+      <End Role="Airport" EntitySet="Airport" />
+      <End Role="Flight" EntitySet="Flight" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Flight_Plane" Association="Self.FK_Flight_Plane">
+      <End Role="Plane" EntitySet="Plane" />
+      <End Role="Flight" EntitySet="Flight" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnal_Vacancy" Association="Self.FK_Personnal_Vacancy">
+      <End Role="Vacancy" EntitySet="Vacancy" />
+      <End Role="Personnal" EntitySet="Personnal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlanePersonnal_Flight" Association="Self.FK_PlanePersonnal_Flight">
+      <End Role="Flight" EntitySet="Flight" />
+      <End Role="PlanePersonnal" EntitySet="PlanePersonnal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlanePersonnal_Personnal" Association="Self.FK_PlanePersonnal_Personnal">
+      <End Role="Personnal" EntitySet="Personnal" />
+      <End Role="PlanePersonnal" EntitySet="PlanePersonnal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tickets_Buyer" Association="Self.FK_Tickets_Buyer">
+      <End Role="Buyer" EntitySet="Buyer" />
+      <End Role="Tickets" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tickets_Flight" Association="Self.FK_Tickets_Flight">
+      <End Role="Flight" EntitySet="Flight" />
+      <End Role="Tickets" EntitySet="Tickets" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

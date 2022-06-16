@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5410bc75660f417a825a9396c1ae8f37" Name="Diagram1">
+        <EntityTypeShape EntityType="Skyline_DBModel.Airport" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Skyline_DBModel.Buyer" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Skyline_DBModel.Flight" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Skyline_DBModel.Personnal" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Skyline_DBModel.Plane" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Skyline_DBModel.Tickets" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Skyline_DBModel.Vacancy" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="Skyline_DBModel.FK_Flight_Airport" ManuallyRouted="false" />
+        <AssociationConnector Association="Skyline_DBModel.FK_Flight_Airport1" ManuallyRouted="false" />
+        <AssociationConnector Association="Skyline_DBModel.FK_Tickets_Buyer" ManuallyRouted="false" />
+        <AssociationConnector Association="Skyline_DBModel.FK_Flight_Plane" ManuallyRouted="false" />
+        <AssociationConnector Association="Skyline_DBModel.FK_Tickets_Flight" ManuallyRouted="false" />
+        <AssociationConnector Association="Skyline_DBModel.FK_Personnal_Vacancy" ManuallyRouted="false" />
+        <AssociationConnector Association="Skyline_DBModel.PlanePersonnal" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

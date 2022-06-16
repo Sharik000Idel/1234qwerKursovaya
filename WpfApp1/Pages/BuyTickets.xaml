@@ -1,0 +1,87 @@
+﻿<Page x:Class="WpfApp1.Pages.BuyTickets"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BuyTickets">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="TicketNumber" Text="Номер билета " VerticalAlignment="Center"/>
+            <TextBlock x:Name="FLightNumber" Text="номер рейса " Grid.Row="1" VerticalAlignment="Center"/>
+
+            <WrapPanel  Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center">
+                <TextBlock  x:Name="OutAitportTB" Text="место вылета "/>
+                <TextBlock x:Name="InAitportTB" Text="место посадки " />
+            </WrapPanel>
+
+            <WrapPanel  Grid.Row="3" Orientation="Vertical" VerticalAlignment="Center">
+                <TextBlock x:Name="OutAitportTBDate" Text="время вылета "/>
+                <TextBlock x:Name="InAitportTBDate" Text="время посадки " />
+            </WrapPanel>
+
+            <TextBlock x:Name="ChairNumberText" Text="номер кресла " Grid.Row="4" VerticalAlignment="Center"/>
+        </Grid>
+
+        
+
+        
+
+        <ListView x:Name="DateList" Grid.Row="1" Grid.Column="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  SelectionChanged="DateList_Selected">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black">
+                        <Grid Width="600">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.49*"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding FlightNumber}"/>
+                            <WrapPanel Grid.Column="1" Orientation="Horizontal">
+                                <WrapPanel Orientation="Vertical">
+                                    <TextBlock Text="Время вылета: "/>
+                                    <TextBlock Text="Время приземления: "/>
+                                </WrapPanel>
+                                <WrapPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding OutAirportDate}"/>
+                                    <TextBlock Text="{Binding InAirportDate}"/>
+                                </WrapPanel>
+                                
+                            </WrapPanel>
+                            <TextBlock Grid.Column="2" Text="{Binding Cost_bin}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
